@@ -14,8 +14,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -81,5 +80,24 @@ public class TodoControllerTest {
                 .andExpect(status().isNoContent());
 
         assertEquals(0,todoRepositoryNew.findAll().size());
+    }
+
+    @Test
+    void should_return_todo_item_when_perform_put_on_text_given_id_and_todo_item_with_different_text() throws Exception {
+        //given
+        TodoItem todoItem = new TodoItem("1","task 1",false);
+        todoRepositoryNew.insert(todoItem);
+        String updatedTodoItem = "{\n" +
+                "    \"text\":\"new task\",\n" +
+                "    \"done\":false\n" +
+                "}";
+        //When
+        //then
+        mockMvc.perform(put("/todos/{id}",todoItem.getId())
+                .contentType(MediaType.APPLICATION_JSON).content(updatedTodoItem))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.text").value("new task"))
+                .andExpect(jsonPath("$.done").value(false));
+
     }
 }
