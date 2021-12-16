@@ -1,6 +1,7 @@
 package com.example.todoList.service;
 
 import com.example.todoList.entity.TodoItem;
+import com.example.todoList.exception.NoTodoItemFoundException;
 import com.example.todoList.repository.TodoRepositoryNew;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,6 +14,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
@@ -92,5 +94,18 @@ public class TodoServiceTest {
         //then
         verify(todoRepositoryNew).deleteById(todoItem.getId());
 
+    }
+
+    @Test
+    void should_throw_exception_when_findById_given_todo_items_and_invalid_id() {
+        //given
+        String id = "999";
+        TodoItem todoItem = new TodoItem("1","task 1",false);
+        //when
+        given(todoRepositoryNew.findById("999"))
+                .willThrow(NoTodoItemFoundException.class);
+
+        //then
+        assertThrows(NoTodoItemFoundException.class, () -> todoService.findById(id));
     }
 }
