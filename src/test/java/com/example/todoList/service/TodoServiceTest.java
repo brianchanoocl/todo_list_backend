@@ -82,5 +82,15 @@ public class TodoServiceTest {
         assertEquals(actual, todoItem);
     }
 
+    @Test
+    void should_remove_todo_item_when_delete_given_id() {
+        //given
+        TodoItem todoItem = new TodoItem("1","task 1",false);
 
+        //When
+        todoService.delete(todoItem.getId());
+        //then
+        verify(todoRepositoryNew).deleteById(todoItem.getId());
+
+    }
 }
