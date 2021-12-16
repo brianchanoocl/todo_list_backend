@@ -13,7 +13,9 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
 
 @ExtendWith(SpringExtension.class)
 public class TodoServiceTest {
@@ -35,5 +37,22 @@ public class TodoServiceTest {
         List<TodoItem> actual =  todoService.findAll();
         //then
         assertEquals(todoItems,actual);
+    }
+
+    @Test
+    void should_return_updated_when_edit_todo_item_given_updated_todo_item() {
+        //given
+        TodoItem todoItem = new TodoItem("1","task 1",false);
+        TodoItem updatedTodoItem = new TodoItem("1","new name", false);
+        given(todoRepositoryNew.findById(any()))
+                .willReturn(java.util.Optional.of(todoItem));
+        todoItem.setText(updatedTodoItem.getText());
+        given(todoRepositoryNew.save(any(TodoItem.class)))
+                .willReturn(todoItem);
+        //When
+        TodoItem actual = todoService.edit(todoItem.getId(),updatedTodoItem);
+        //then
+        verify(todoRepositoryNew).save(todoItem);
+        assertEquals(actual,todoItem);
     }
 }

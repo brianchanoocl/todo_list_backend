@@ -22,11 +22,6 @@ public class TodoController {
         return todoService.findAll();
     }
 
-    @GetMapping("/{id}")
-    public TodoItem getTodoItemById(@PathVariable String id) {
-        return todoService.findById(id);
-    }
-
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public TodoItem createTodoItem(@RequestBody TodoItem todoItem){
