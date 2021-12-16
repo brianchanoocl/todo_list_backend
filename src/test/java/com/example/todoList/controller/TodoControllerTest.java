@@ -100,4 +100,23 @@ public class TodoControllerTest {
                 .andExpect(jsonPath("$.done").value(false));
 
     }
+
+    @Test
+    void should_return_todo_item_when_perform_put_on_done_status_given_id_and_todo_item_with_different_done_status() throws Exception {
+        //given
+        TodoItem todoItem = new TodoItem("1","task 1",false);
+        todoRepositoryNew.insert(todoItem);
+        String updatedTodoItem = "{\n" +
+                "    \"text\":\"task 1\",\n" +
+                "    \"done\":false\n" +
+                "}";
+        //When
+        //then
+        mockMvc.perform(put("/todos/{id}",todoItem.getId())
+                .contentType(MediaType.APPLICATION_JSON).content(updatedTodoItem))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.text").value("task 1"))
+                .andExpect(jsonPath("$.done").value(true));
+
+    }
 }
