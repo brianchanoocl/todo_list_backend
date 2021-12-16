@@ -23,7 +23,7 @@ public class TodoService {
         TodoItem todoItem = findById(id);
 
         if(updatedTodoItem.getText().equals(todoItem.getText())){
-            todoItem.setDone(!updatedTodoItem.isDone());
+            todoItem.setDone(!todoItem.isDone());
         } else {
             todoItem.setText(updatedTodoItem.getText());
         }
