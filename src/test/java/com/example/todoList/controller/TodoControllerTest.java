@@ -8,12 +8,14 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -47,6 +49,24 @@ public class TodoControllerTest {
                 .andExpect(jsonPath("$[0].id").isString())
                 .andExpect(jsonPath("$[0].text").value("task 1"))
                 .andExpect(jsonPath("$[0].done").value(false));
+    }
+
+    @Test
+    void should_return_todo_item_when_perform_post_given_todo_item() throws Exception {
+        //given
+        String todoItem = "{\n" +
+                "    \"text\":\"task 1\",\n" +
+                "    \"done\":false\n" +
+                "}";
+        //When
+        //then
+        mockMvc.perform(post("/todos")
+                .contentType(MediaType.APPLICATION_JSON).content(todoItem))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.id").isString())
+                .andExpect(jsonPath("$.text").value("task 1"))
+                .andExpect(jsonPath("$.done").value(false));
+
     }
 
     @Test
