@@ -55,4 +55,16 @@ public class TodoServiceTest {
         verify(todoRepositoryNew).save(todoItem);
         assertEquals(actual,todoItem);
     }
+
+    @Test
+    void should_return_todo_item_when_create_todo_item_given_new_todo_item() {
+        //given
+        TodoItem todoItem = new TodoItem("1","task 1",false);
+        given(todoRepositoryNew.insert(any(TodoItem.class)))
+                .willReturn(todoItem);
+        //When
+        TodoItem actual = todoService.create(todoItem);
+        //then
+        assertEquals(actual,todoItem);
+    }
 }
