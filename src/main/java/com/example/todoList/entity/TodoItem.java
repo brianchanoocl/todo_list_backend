@@ -11,7 +11,7 @@ public class TodoItem {
     public TodoItem(String id, String text, Boolean done) {
         this.id = id;
         this.text = text;
-        this.done = done;
+        this.done = false;
     }
 
     public String getId() {
