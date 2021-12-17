@@ -1,0 +1,112 @@
+.App {
+  text-align: center;
+}
+
+.center-text {
+  text-align: center;
+}
+
+.main-page, .center-item {
+  width: 80%;
+  margin: 2% auto;
+}
+
+.todo-item {
+  width: 70%;
+  margin: 1% auto;
+  font-size: 21px;
+  border: 2px solid #44474a;
+  padding: 1%;
+  overflow-wrap: break-word;
+}
+
+button.row-item {
+  color: white;
+  border-radius: 5px;
+  border: 0px;
+  background-color: #1580eb;
+  margin-left: 1%;
+  font-size: 18px;
+  width: 9%;
+  height: 45px;
+}
+
+input.row-item {
+  width: 27%;
+  height: 36px;
+}
+
+.remove-check-box {
+  float: right;
+  margin-right: 1%;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.done-todo-item {
+  text-decoration: line-through;
+}
+
+.link {
+  margin-left: 1%;
+  margin-top: 1%;
+  font-size: 18px !important;
+  text-decoration: none;
+}
+
+a:visited{
+  color:white;
+}
+
+.todo-item-display {
+  width: 40%;
+  margin: 1% auto;
+  font-size: 15px;
+  border: 1px solid #44474a;
+  border-radius: 6px;
+  padding: 1%;
+  overflow-wrap: break-word;
+}
+
+.todo-item-display-done {
+  background-color: rgb(212, 236, 225);
+}
+
+.todo-item-display-undone {
+  background-color: rgb(243, 216, 212);
+}
+
+.list-empty-label {
+  font-size: 27px;
+  width: 60%;
+  margin: 1% auto;
+  font-size: 27px;
+  padding: 1%;
+  overflow-wrap: break-word;
+}
+
+.rainbow {
+  animation: rainbow-animation 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-play-state: running;
+}
+
+@keyframes rainbow-animation {
+  0% {
+    border-color: green;
+    color: green;
+  }
+  25% {
+    border-color: red;
+    color: red;
+  }
+  75% {
+    border-color: rgb(224, 224, 24);
+    color: rgb(224, 224, 24);
+  }
+  100% {
+    border-color: green;
+    color: green;
+  }
+}
