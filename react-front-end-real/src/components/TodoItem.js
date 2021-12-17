@@ -19,6 +19,8 @@ function TodoItem(props) {
     const handleOk = () => {
         if(newTodoItemDetail.trim() === "")
             alert("dun be lazy, do some work la... = =");
+        else if (newTodoItemDetail === props.todoItem.text) 
+            alert("if no change name, you click cancel la... = =");
         else{
             updateTodoItenDetail({...props.todoItem, text: newTodoItemDetail}).then((response) => {
                 dispatch({type: UPDATE_TODOITEM_DETAIL, payload: response.data});

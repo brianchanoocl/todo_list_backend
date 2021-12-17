@@ -108,7 +108,7 @@ public class TodoControllerTest {
         todoRepositoryNew.insert(todoItem);
         String updatedTodoItem = "{\n" +
                 "    \"text\":\"task 1\",\n" +
-                "    \"done\":false\n" +
+                "    \"done\":true\n" +
                 "}";
         //When
         //then

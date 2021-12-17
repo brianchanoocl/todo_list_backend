@@ -6,9 +6,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class TodoItem {
     private String id;
     private String text;
-    private boolean done;
+    private Boolean done;
 
-    public TodoItem(String id, String text, boolean done) {
+    public TodoItem(String id, String text, Boolean done) {
         this.id = id;
         this.text = text;
         this.done = done;
@@ -30,11 +30,11 @@ public class TodoItem {
         this.text = text;
     }
 
-    public boolean isDone() {
+    public Boolean isDone() {
         return done;
     }
 
-    public void setDone(boolean done) {
+    public void setDone(Boolean done) {
         this.done = done;
     }
 }

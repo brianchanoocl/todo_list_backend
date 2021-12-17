@@ -22,12 +22,15 @@ public class TodoService {
     public TodoItem edit(String id, TodoItem updatedTodoItem) {
         TodoItem todoItem = findById(id);
 
-        if(updatedTodoItem.getText() != null){
+        if(updatedTodoItem.getText() != null && !updatedTodoItem.getText().equals(todoItem.getText())){
             todoItem.setText(updatedTodoItem.getText());
         }
 
-        todoItem.setDone(updatedTodoItem.isDone());
-
+        if(updatedTodoItem.isDone() != null) {
+            todoItem.setDone(updatedTodoItem.isDone());
+        } else if (updatedTodoItem.isDone() == null) {
+            todoItem.setDone(!todoItem.isDone());
+        }
 
         return todoRepositoryNew.save(todoItem);
     }
