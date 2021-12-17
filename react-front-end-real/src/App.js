@@ -20,7 +20,6 @@ function App() {
 
     useEffect(() => {
         getTodos().then((response) => {
-            console.log(response)
             dispatch({type: INIT_TODO, payload: response.data});
         })
     });

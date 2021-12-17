@@ -22,11 +22,12 @@ public class TodoService {
     public TodoItem edit(String id, TodoItem updatedTodoItem) {
         TodoItem todoItem = findById(id);
 
-        if(updatedTodoItem.getText().equals(todoItem.getText())){
-            todoItem.setDone(!todoItem.isDone());
-        } else {
+        if(updatedTodoItem.getText() != null){
             todoItem.setText(updatedTodoItem.getText());
         }
+
+        todoItem.setDone(updatedTodoItem.isDone());
+
 
         return todoRepositoryNew.save(todoItem);
     }
